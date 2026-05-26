@@ -8,36 +8,31 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Segoe UI',sans-serif;background:#f7f7f5;color:#1a1a1a;min-height:100vh}
 
-  header{background:#fff;border-bottom:1px solid #eee;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-  .logo-svg{height:52px;width:auto}
-  .matricula-btn{background:#f7941d;color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px;text-decoration:none;transition:background .2s;white-space:nowrap}
-  .matricula-btn:hover{background:#e07f0a}
-
-  .period-bar{background:#f7941d;color:#fff;text-align:center;padding:.45rem;font-size:.8rem}
+  header{background:#1a1a1a;padding:1.2rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+  .logo-img{height:70px;width:auto;display:block}
+  .header-name{color:#fff;font-size:.78rem;letter-spacing:.5px;text-transform:uppercase;opacity:.5}
 
   main{max-width:860px;margin:0 auto;padding:2.5rem 1.2rem}
 
   #home h2{text-align:center;font-size:1rem;color:#777;font-weight:400;margin-bottom:1.8rem}
+
   .lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:1rem}
-  .lang-card{background:#fff;border:1.5px solid #eee;border-radius:16px;padding:1.5rem 1rem 1.2rem;display:flex;flex-direction:column;align-items:center;gap:.55rem;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+  .lang-card{background:#fff;border:1.5px solid #eee;border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s}
   .lang-card:hover{border-color:#f7941d;box-shadow:0 4px 18px rgba(247,148,29,.13)}
-  .lang-flag{width:48px;height:32px;border-radius:4px;overflow:hidden;display:block}
-  .lang-name{font-size:.88rem;font-weight:700;color:#1a1a1a;text-align:center}
-  .lang-levels{font-size:.7rem;color:#bbb;text-align:center}
-  .lang-card{position:relative;overflow:hidden}
-  .lang-accent{position:absolute;top:0;left:0;right:0;height:5px;border-radius:14px 14px 0 0}
+  .lang-accent{height:5px;width:100%}
+  .lang-card-body{padding:1.2rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.4rem}
+  .lang-name{font-size:.95rem;font-weight:700;color:#1a1a1a;text-align:center}
+  .lang-levels{font-size:.72rem;color:#bbb;text-align:center}
 
   #detail{display:none}
   .back-btn{background:none;border:none;color:#f7941d;font-size:.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:.3rem;margin-bottom:1.5rem;padding:0}
   .back-btn:hover{color:#e07f0a}
-  .detail-header{display:flex;align-items:center;gap:.7rem;margin-bottom:.25rem}
-  .detail-flag{font-size:1.8rem}
-  .detail-title{font-size:1.25rem;font-weight:700;color:#1a1a1a}
+  .detail-title{font-size:1.25rem;font-weight:700;color:#1a1a1a;margin-bottom:.2rem}
   .detail-sub{font-size:.78rem;color:#aaa;margin-bottom:2rem}
 
   .level-block{margin-bottom:1.4rem}
+  .level-code{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.5px;padding:.2rem .55rem;border-radius:20px;margin-bottom:.4rem}
   .level-name{font-size:.92rem;font-weight:600;color:#1a1a1a;margin-bottom:.7rem}
-  .level-code{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.5px;padding:.2rem .55rem;border-radius:20px;margin-bottom:.5rem}
   .turmas-row{display:flex;flex-wrap:wrap;gap:.5rem}
   .turma-chip{background:#fff;border:1px solid #eee;border-radius:10px;padding:.55rem .85rem;min-width:142px}
   .chip-dia{font-size:.8rem;font-weight:600;color:#1a1a1a}
@@ -56,29 +51,15 @@
 
   .soon-msg{background:#fff;border:1px solid #eee;border-radius:14px;padding:2rem;text-align:center;color:#888;font-size:.9rem;line-height:1.8}
 
-  footer{text-align:center;padding:1.2rem;font-size:.75rem;color:#ccc;border-top:1px solid #eee;margin-top:1.5rem}
+  footer{text-align:center;padding:1.4rem;border-top:1px solid #eee;margin-top:1.5rem}
 </style>
 </head>
 <body>
 
 <header>
-  <!-- Logo NLC SVG inline (cores oficiais: laranja #f7941d, verde #5aaa1e, azul-claro #4dc8c8, amarelo #f5d14a) -->
-  <svg class="logo-svg" viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NLC – fale com o mundo">
-    <!-- N -->
-    <text x="4" y="52" font-family="'Arial Rounded MT Bold','Arial Black',sans-serif" font-size="58" font-weight="900" fill="#f7941d">nlc</text>
-    <!-- balão azul -->
-    <ellipse cx="170" cy="26" rx="22" ry="16" fill="#4dc8c8"/>
-    <polygon points="158,38 162,48 170,38" fill="#4dc8c8"/>
-    <!-- balão amarelo (frente) -->
-    <ellipse cx="182" cy="34" rx="19" ry="14" fill="#f5d14a"/>
-    <polygon points="188,44 192,54 182,44" fill="#f5d14a"/>
-    <!-- tagline -->
-    <text x="4" y="67" font-family="'Arial Rounded MT Bold','Arial Black',sans-serif" font-size="13" font-weight="900" fill="#5aaa1e">fale com o mundo</text>
-  </svg>
-  <a href="https://linktr.ee/nlcufpe" target="_blank" class="matricula-btn">Fazer matrícula</a>
+  <img src="https://i.imgur.com/aHF0yiS.png" class="logo-img" alt="NLC – fale com o mundo">
+  <div class="header-name">Núcleo de Línguas e Culturas — UFPE</div>
 </header>
-
-<div class="period-bar">Semestre Regular 2026.1 &nbsp;·&nbsp; 09 de março a 10 de julho de 2026</div>
 
 <main>
 
@@ -86,84 +67,63 @@
     <h2>Escolha um idioma para ver as turmas disponíveis</h2>
     <div class="lang-grid">
       <div class="lang-card" onclick="showDetail('ingles')">
-        <div class="lang-accent" style="background:linear-gradient(90deg,#012169,#C8102E,#012169)"></div>
-        <svg class="lang-flag" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="32" fill="#012169"/>
-          <path d="M0,0 L48,32 M48,0 L0,32" stroke="#fff" stroke-width="6"/>
-          <path d="M0,0 L48,32 M48,0 L0,32" stroke="#C8102E" stroke-width="4"/>
-          <path d="M24,0 V32 M0,16 H48" stroke="#fff" stroke-width="10"/>
-          <path d="M24,0 V32 M0,16 H48" stroke="#C8102E" stroke-width="6"/>
-        </svg>
-        <div class="lang-name">Inglês</div>
-        <div class="lang-levels">A1 · A2 · B1 · B2 · Instrumental</div>
+        <div class="lang-accent" style="background:#f7941d"></div>
+        <div class="lang-card-body">
+          <div class="lang-name">Inglês</div>
+          <div class="lang-levels">A1 · A2 · B1 · B2 · Instrumental</div>
+        </div>
       </div>
       <div class="lang-card" onclick="showDetail('frances')">
-        <div class="lang-accent" style="background:linear-gradient(90deg,#002395 33%,#fff 33%,#fff 66%,#ED2939 66%)"></div>
-        <svg class="lang-flag" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-          <rect width="16" height="32" fill="#002395"/>
-          <rect x="16" width="16" height="32" fill="#fff"/>
-          <rect x="32" width="16" height="32" fill="#ED2939"/>
-        </svg>
-        <div class="lang-name">Francês</div>
-        <div class="lang-levels">A1 · A2</div>
+        <div class="lang-accent" style="background:#4dc8c8"></div>
+        <div class="lang-card-body">
+          <div class="lang-name">Francês</div>
+          <div class="lang-levels">A1 · A2</div>
+        </div>
       </div>
       <div class="lang-card" onclick="showDetail('espanhol')">
-        <div class="lang-accent" style="background:linear-gradient(180deg,#AA151B 25%,#F1BF00 25%,#F1BF00 75%,#AA151B 75%)"></div>
-        <svg class="lang-flag" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="32" fill="#AA151B"/>
-          <rect y="8" width="48" height="16" fill="#F1BF00"/>
-        </svg>
-        <div class="lang-name">Espanhol</div>
-        <div class="lang-levels">A1 · A2 · B2</div>
+        <div class="lang-accent" style="background:#f5d14a"></div>
+        <div class="lang-card-body">
+          <div class="lang-name">Espanhol</div>
+          <div class="lang-levels">A1 · A2 · B2</div>
+        </div>
       </div>
       <div class="lang-card" onclick="showDetail('alemao')">
-        <div class="lang-accent" style="background:linear-gradient(180deg,#000 33%,#D00 33%,#D00 66%,#FFCE00 66%)"></div>
-        <svg class="lang-flag" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="11" fill="#000"/>
-          <rect y="11" width="48" height="10" fill="#DD0000"/>
-          <rect y="21" width="48" height="11" fill="#FFCE00"/>
-        </svg>
-        <div class="lang-name">Alemão</div>
-        <div class="lang-levels">A1 · A2 · B1</div>
+        <div class="lang-accent" style="background:#5aaa1e"></div>
+        <div class="lang-card-body">
+          <div class="lang-name">Alemão</div>
+          <div class="lang-levels">A1 · A2 · B1</div>
+        </div>
       </div>
       <div class="lang-card" onclick="showDetail('japones')">
-        <div class="lang-accent" style="background:#BC002D"></div>
-        <svg class="lang-flag" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="32" fill="#fff"/>
-          <circle cx="24" cy="16" r="9" fill="#BC002D"/>
-        </svg>
-        <div class="lang-name">Japonês</div>
-        <div class="lang-levels">Básico · Intermediário</div>
+        <div class="lang-accent" style="background:#f7941d"></div>
+        <div class="lang-card-body">
+          <div class="lang-name">Japonês</div>
+          <div class="lang-levels">Básico · Intermediário</div>
+        </div>
       </div>
       <div class="lang-card" onclick="showDetail('portugues')">
-        <div class="lang-accent" style="background:linear-gradient(90deg,#009c3b,#009c3b)"></div>
-        <svg class="lang-flag" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg">
-          <rect width="48" height="32" fill="#009c3b"/>
-          <polygon points="24,3 45,16 24,29 3,16" fill="#FFDF00"/>
-          <circle cx="24" cy="16" r="7" fill="#002776"/>
-          <path d="M17.5,13.5 Q24,11 30.5,13.5" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/>
-        </svg>
-        <div class="lang-name">Português para Estrangeiros</div>
-        <div class="lang-levels">Sob demanda</div>
+        <div class="lang-accent" style="background:#4dc8c8"></div>
+        <div class="lang-card-body">
+          <div class="lang-name">Português para Estrangeiros</div>
+          <div class="lang-levels">Sob demanda</div>
+        </div>
       </div>
     </div>
+
     <div class="cta-bar">
-      <p><strong>Pronto para se matricular?</strong><br>Acesse o formulário oficial do NLC UFPE.</p>
-      <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">Acessar formulário</a>
+      <p><strong>Matrículas, calendário e outras informações</strong><br>Acesse nosso Linktree para mais detalhes.</p>
+      <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">linktr.ee/nlcufpe</a>
     </div>
   </div>
 
   <div id="detail">
     <button class="back-btn" onclick="goBack()">&#8592; Voltar aos idiomas</button>
-    <div class="detail-header">
-      <div id="d-flag" class="detail-flag"></div>
-      <div id="d-title" class="detail-title"></div>
-    </div>
+    <div id="d-title" class="detail-title"></div>
     <div class="detail-sub">Semestre 2026.1 · 09/03 a 10/07/2026</div>
     <div id="d-body"></div>
     <div class="cta-bar">
-      <p><strong>Encontrou uma turma?</strong><br>Acesse o formulário e faça sua matrícula.</p>
-      <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">Fazer matrícula</a>
+      <p><strong>Matrículas, calendário e outras informações</strong><br>Acesse nosso Linktree para mais detalhes.</p>
+      <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">linktr.ee/nlcufpe</a>
     </div>
   </div>
 
@@ -171,12 +131,12 @@
 
 <footer>
   <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem">
-    <a href="https://instagram.com/nlc.ufpe" target="_blank" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    <a href="https://instagram.com/nlc.ufpe" target="_blank" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
       Siga no Instagram
     </a>
-    <a href="https://linktr.ee/nlcufpe" target="_blank" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;background:#f7941d;color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    <a href="https://linktr.ee/nlcufpe" target="_blank" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;background:#f7941d;color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       Inscrições no site
     </a>
   </div>
@@ -185,7 +145,7 @@
 
 <script>
 const data={
-  ingles:{flag:'🇬🇧',name:'Inglês',levels:[
+  ingles:{name:'Inglês',levels:[
     {code:'A1.1',name:'Básico 1',t:[
       {d:'2ª e 4ª',h:'15h–17h',m:'Presencial'},{d:'3ª e 5ª',h:'19h–21h',m:'Presencial'},
       {d:'Sexta',h:'08h–12h',m:'Presencial'},{d:'2ª e 4ª',h:'17h–19h',m:'Remota'},
@@ -223,7 +183,7 @@ const data={
       {d:'Sexta',h:'17h–21h',m:'Remota'},
     ]},
   ]},
-  frances:{flag:'🇫🇷',name:'Francês',levels:[
+  frances:{name:'Francês',levels:[
     {code:'A1.1',name:'Básico 1',t:[
       {d:'Sábado',h:'08h–12h',m:'Presencial'},{d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'3ª e 5ª',h:'19h–21h',m:'Remota'},
     ]},
@@ -237,7 +197,7 @@ const data={
       {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},
     ]},
   ]},
-  espanhol:{flag:'🇪🇸',name:'Espanhol',levels:[
+  espanhol:{name:'Espanhol',levels:[
     {code:'A1.1',name:'Básico 1',t:[
       {d:'3ª e 5ª',h:'19h–21h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
     ]},
@@ -245,7 +205,7 @@ const data={
     {code:'A2.1',name:'Intermediário 1',t:[{d:'2ª e 4ª',h:'19h–21h',m:'Remota'}]},
     {code:'B2.1',name:'Avançado 1',t:[{d:'2ª e 4ª',h:'19h–21h',m:'Remota'}]},
   ]},
-  alemao:{flag:'🇩🇪',name:'Alemão',levels:[
+  alemao:{name:'Alemão',levels:[
     {code:'A1.1',name:'Básico 1',t:[
       {d:'2ª e 4ª',h:'17h–19h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
     ]},
@@ -253,34 +213,41 @@ const data={
     {code:'A2.1',name:'Intermediário 1',t:[{d:'3ª e 5ª',h:'17h–19h',m:'Remota'}]},
     {code:'B1.1',name:'Pós-intermediário 1',t:[{d:'3ª e 5ª',h:'19h–21h',m:'Remota'}]},
   ]},
-  japones:{flag:'🇯🇵',name:'Japonês',levels:[
+  japones:{name:'Japonês',levels:[
     {code:'Nível 1',name:'Básico 1',t:[{d:'2ª e 4ª',h:'19:30–21:30',m:'Remota'}]},
     {code:'Nível 2',name:'Básico 2',t:[{d:'3ª e 5ª',h:'19:30–21:30',m:'Remota'}]},
     {code:'Nível 3',name:'Intermediário 1',t:[{d:'6ª e Sáb',h:'19:30–21:30',m:'Remota'}]},
   ]},
-  portugues:{flag:'🌍',name:'Português para Estrangeiros',soon:true},
+  portugues:{name:'Português para Estrangeiros',soon:true},
 };
+
+const colors=['#f7941d','#4dc8c8','#5aaa1e','#e07f0a','#0a9e8a','#c87c00','#3d8a00','#e05a00','#007a6e'];
 
 function showDetail(id){
   const d=data[id];
   document.getElementById('home').style.display='none';
   document.getElementById('detail').style.display='block';
-  document.getElementById('d-flag').textContent=d.flag;
   document.getElementById('d-title').textContent=d.name;
   const body=document.getElementById('d-body');
   if(d.soon){
-    body.innerHTML=`<div class="soon-msg">As turmas de <strong>Português para Estrangeiros</strong> são ofertadas sob demanda.<br>Acesse o formulário de matrícula para verificar a disponibilidade e se inscrever.</div>`;
+    body.innerHTML=`<div class="soon-msg">As turmas de <strong>Português para Estrangeiros</strong> são ofertadas sob demanda.<br>Acesse o Linktree para verificar disponibilidade e se inscrever.</div>`;
     return;
   }
   let html='';
   d.levels.forEach((lv,i)=>{
     if(i>0) html+='<hr class="divider">';
-    const colors=['#f7941d','#4dc8c8','#5aaa1e','#e07f0a','#0a9e8a','#c87c00','#3d8a00','#e05a00','#007a6e'];
-    const bg=colors[i%colors.length];
-    html+=`<div class="level-block"><div class="level-code" style="background:${bg}22;color:${bg}">${lv.code}</div><div class="level-name">${lv.name}</div><div class="turmas-row">`;
+    const c=colors[i%colors.length];
+    html+=`<div class="level-block">
+      <div class="level-code" style="background:${c}22;color:${c}">${lv.code}</div>
+      <div class="level-name">${lv.name}</div>
+      <div class="turmas-row">`;
     lv.t.forEach(t=>{
       const cls=t.m==='Presencial'?'mod-p':'mod-r';
-      html+=`<div class="turma-chip"><div class="chip-dia">${t.d}</div><div class="chip-hora">${t.h}</div><span class="chip-mod ${cls}">${t.m}</span></div>`;
+      html+=`<div class="turma-chip">
+        <div class="chip-dia">${t.d}</div>
+        <div class="chip-hora">${t.h}</div>
+        <span class="chip-mod ${cls}">${t.m}</span>
+      </div>`;
     });
     html+=`</div></div>`;
   });
