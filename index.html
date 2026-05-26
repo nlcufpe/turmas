@@ -6,52 +6,69 @@
 <title>NLC UFPE – Turmas 2026.1</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',sans-serif;background:#f7f7f5;color:#1a1a1a;min-height:100vh}
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef0ee;color:#1a1a1a;min-height:100vh}
 
-  header{background:#1a1a1a;padding:1.2rem 2rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
-  .logo-img{height:70px;width:auto;display:block}
-  .header-name{color:#fff;font-size:.78rem;letter-spacing:.5px;text-transform:uppercase;opacity:.5}
+  /* HEADER */
+  header{background:#fff;border-bottom:1px solid #e4e4e4;padding:1.4rem 2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem}
+  .logo-img{height:64px;width:auto}
+  .header-name{color:#aaa;font-size:.7rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
 
-  main{max-width:860px;margin:0 auto;padding:2.5rem 1.2rem}
+  /* MAIN */
+  main{max-width:860px;margin:0 auto;padding:2.8rem 1.4rem}
 
-  #home h2{text-align:center;font-size:1rem;color:#777;font-weight:400;margin-bottom:1.8rem}
+  /* HOME */
+  .home-intro{text-align:center;margin-bottom:2.2rem}
+  .home-intro h2{font-size:1.35rem;font-weight:700;color:#1a1a1a;margin-bottom:.4rem}
+  .home-intro p{font-size:.88rem;color:#aaa;font-weight:400}
 
-  .lang-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:1rem}
-  .lang-card{background:#fff;border:1.5px solid #eee;border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s}
-  .lang-card:hover{border-color:#f7941d;box-shadow:0 4px 18px rgba(247,148,29,.13)}
-  .lang-accent{height:5px;width:100%}
-  .lang-card-body{padding:1.2rem 1rem;display:flex;flex-direction:column;align-items:center;gap:.4rem}
-  .lang-name{font-size:.95rem;font-weight:700;color:#1a1a1a;text-align:center}
-  .lang-levels{font-size:.72rem;color:#bbb;text-align:center}
+  .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+  @media(max-width:560px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
 
+  .lang-card{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .18s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  .lang-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.10);transform:translateY(-3px)}
+  .lang-accent{height:8px;width:100%}
+  .lang-card-body{padding:1.2rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.35rem}
+  .lang-card-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
+  .lang-name{font-size:1rem;font-weight:700;color:#1a1a1a;line-height:1.25}
+  .lang-arrow{color:#ddd;font-size:1.1rem;flex-shrink:0;transition:color .2s,transform .2s}
+  .lang-card:hover .lang-arrow{color:#f7941d;transform:translateX(3px)}
+  .lang-levels{font-size:.72rem;color:#bbb;line-height:1.4}
+
+  /* DETAIL */
   #detail{display:none}
-  .back-btn{background:none;border:none;color:#f7941d;font-size:.85rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:.3rem;margin-bottom:1.5rem;padding:0}
-  .back-btn:hover{color:#e07f0a}
-  .detail-title{font-size:1.25rem;font-weight:700;color:#1a1a1a;margin-bottom:.2rem}
-  .detail-sub{font-size:.78rem;color:#aaa;margin-bottom:2rem}
+  .back-btn{background:#fff;border:1.5px solid #e4e4e4;color:#555;font-size:.84rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2rem;padding:.6rem 1.1rem;border-radius:10px;transition:border-color .2s,color .2s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .back-btn:hover{border-color:#f7941d;color:#f7941d}
+  .detail-title{font-size:1.5rem;font-weight:800;color:#1a1a1a;margin-bottom:1.6rem;line-height:1.2}
 
-  .level-block{margin-bottom:1.4rem}
-  .level-code{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.5px;padding:.2rem .55rem;border-radius:20px;margin-bottom:.4rem}
-  .level-name{font-size:.92rem;font-weight:600;color:#1a1a1a;margin-bottom:.7rem}
-  .turmas-row{display:flex;flex-wrap:wrap;gap:.5rem}
-  .turma-chip{background:#fff;border:1px solid #eee;border-radius:10px;padding:.55rem .85rem;min-width:142px}
-  .chip-dia{font-size:.8rem;font-weight:600;color:#1a1a1a}
-  .chip-hora{font-size:.75rem;color:#888;margin-top:.1rem}
-  .chip-mod{display:inline-block;margin-top:.35rem;font-size:.65rem;font-weight:700;padding:.12rem .45rem;border-radius:6px}
-  .mod-p{background:#fff3e0;color:#e07f0a}
-  .mod-r{background:#e0f7f4;color:#0a9e8a}
+  .level-block{background:#fff;border-radius:16px;padding:1.3rem 1.4rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .level-top{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+  .level-code{font-size:.7rem;font-weight:800;padding:.25rem .65rem;border-radius:20px;letter-spacing:.3px}
+  .level-name{font-size:1rem;font-weight:700;color:#1a1a1a}
 
-  .divider{border:none;border-top:1px solid #f0f0f0;margin:1.2rem 0}
+  .turmas-row{display:flex;flex-wrap:wrap;gap:.6rem}
+  .turma-chip{background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:.75rem 1rem;flex:1;min-width:140px}
+  .chip-dia{font-size:.85rem;font-weight:700;color:#1a1a1a}
+  .chip-hora{font-size:.78rem;color:#888;margin-top:.15rem}
+  .chip-mod{display:inline-block;margin-top:.5rem;font-size:.68rem;font-weight:700;padding:.18rem .55rem;border-radius:20px}
+  .mod-p{background:#fff3e0;color:#d4720a}
+  .mod-r{background:#e0f7f4;color:#0a8a7a}
 
-  .cta-bar{background:#fff;border:1px solid #eee;border-radius:14px;padding:1.3rem 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-  .cta-bar p{font-size:.88rem;color:#666;line-height:1.5}
-  .cta-bar strong{color:#1a1a1a}
-  .cta-link{background:#f7941d;color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .2s}
+  /* CTA */
+  .cta-bar{background:#fff;border-radius:16px;padding:1.4rem 1.6rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:2rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+  .cta-bar p{font-size:.88rem;color:#777;line-height:1.6}
+  .cta-bar strong{color:#1a1a1a;display:block;font-size:.95rem;margin-bottom:.1rem}
+  .cta-link{background:#f7941d;color:#fff;font-weight:700;font-size:.9rem;padding:.75rem 1.5rem;border-radius:10px;text-decoration:none;white-space:nowrap;transition:background .2s;box-shadow:0 2px 8px rgba(247,148,29,.3)}
   .cta-link:hover{background:#e07f0a}
 
-  .soon-msg{background:#fff;border:1px solid #eee;border-radius:14px;padding:2rem;text-align:center;color:#888;font-size:.9rem;line-height:1.8}
+  /* FOOTER */
+  footer{text-align:center;padding:2rem 1rem;border-top:1px solid #e4e4e4;margin-top:2rem;background:#fff}
+  .insta-btn{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-weight:700;font-size:.92rem;padding:.8rem 1.8rem;border-radius:10px;margin-bottom:.9rem;box-shadow:0 3px 12px rgba(220,39,67,.25);transition:opacity .2s}
+  .insta-btn:hover{opacity:.88}
+  .footer-copy{font-size:.72rem;color:#ccc}
 
-  footer{text-align:center;padding:1.4rem;border-top:1px solid #eee;margin-top:1.5rem}
+  /* Animação */
+  .fade{animation:fadeIn .22s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -62,56 +79,59 @@
 </header>
 
 <main>
-
   <div id="home">
-    <h2>Escolha um idioma para ver as turmas disponíveis</h2>
+    <div class="home-intro">
+      <h2>Turmas disponíveis</h2>
+      <p>Selecione um idioma para ver os horários</p>
+    </div>
+
     <div class="lang-grid">
       <div class="lang-card" onclick="showDetail('ingles')">
         <div class="lang-accent" style="background:#f7941d"></div>
         <div class="lang-card-body">
-          <div class="lang-name">Inglês</div>
+          <div class="lang-card-top"><span class="lang-name">Inglês</span><span class="lang-arrow">›</span></div>
           <div class="lang-levels">A1 · A2 · B1 · B2 · Instrumental</div>
         </div>
       </div>
       <div class="lang-card" onclick="showDetail('frances')">
         <div class="lang-accent" style="background:#4dc8c8"></div>
         <div class="lang-card-body">
-          <div class="lang-name">Francês</div>
+          <div class="lang-card-top"><span class="lang-name">Francês</span><span class="lang-arrow">›</span></div>
           <div class="lang-levels">A1 · A2</div>
         </div>
       </div>
       <div class="lang-card" onclick="showDetail('espanhol')">
         <div class="lang-accent" style="background:#f5d14a"></div>
         <div class="lang-card-body">
-          <div class="lang-name">Espanhol</div>
+          <div class="lang-card-top"><span class="lang-name">Espanhol</span><span class="lang-arrow">›</span></div>
           <div class="lang-levels">A1 · A2 · B2</div>
         </div>
       </div>
       <div class="lang-card" onclick="showDetail('alemao')">
         <div class="lang-accent" style="background:#5aaa1e"></div>
         <div class="lang-card-body">
-          <div class="lang-name">Alemão</div>
+          <div class="lang-card-top"><span class="lang-name">Alemão</span><span class="lang-arrow">›</span></div>
           <div class="lang-levels">A1 · A2 · B1</div>
         </div>
       </div>
       <div class="lang-card" onclick="showDetail('japones')">
         <div class="lang-accent" style="background:#f7941d"></div>
         <div class="lang-card-body">
-          <div class="lang-name">Japonês</div>
+          <div class="lang-card-top"><span class="lang-name">Japonês</span><span class="lang-arrow">›</span></div>
           <div class="lang-levels">Básico · Intermediário</div>
         </div>
       </div>
       <div class="lang-card" onclick="showDetail('portugues')">
         <div class="lang-accent" style="background:#4dc8c8"></div>
         <div class="lang-card-body">
-          <div class="lang-name">Português para Estrangeiros</div>
-          <div class="lang-levels">Sob demanda</div>
+          <div class="lang-card-top"><span class="lang-name">Português para Estrangeiros</span><span class="lang-arrow">›</span></div>
+          <div class="lang-levels">Básico 1 · Básico 2</div>
         </div>
       </div>
     </div>
 
     <div class="cta-bar">
-      <p><strong>Matrículas, calendário e outras informações</strong><br>Acesse nosso Linktree para mais detalhes.</p>
+      <p><strong>Matrículas, calendário e outras informações</strong>Acesse nosso Linktree para mais detalhes.</p>
       <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">linktr.ee/nlcufpe</a>
     </div>
   </div>
@@ -119,31 +139,25 @@
   <div id="detail">
     <button class="back-btn" onclick="goBack()">&#8592; Voltar aos idiomas</button>
     <div id="d-title" class="detail-title"></div>
-    <div class="detail-sub">Semestre 2026.1 · 09/03 a 10/07/2026</div>
     <div id="d-body"></div>
     <div class="cta-bar">
-      <p><strong>Matrículas, calendário e outras informações</strong><br>Acesse nosso Linktree para mais detalhes.</p>
+      <p><strong>Matrículas, calendário e outras informações</strong>Acesse nosso Linktree para mais detalhes.</p>
       <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">linktr.ee/nlcufpe</a>
     </div>
   </div>
-
 </main>
 
 <footer>
-  <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem">
-    <a href="https://instagram.com/nlc.ufpe" target="_blank" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
-      Siga no Instagram
-    </a>
-    <a href="https://linktr.ee/nlcufpe" target="_blank" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;background:#f7941d;color:#fff;font-weight:700;font-size:.88rem;padding:.65rem 1.4rem;border-radius:8px">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      Inscrições no site
-    </a>
-  </div>
-  <div style="font-size:.72rem;color:#ccc">Núcleo de Línguas e Culturas – UFPE</div>
+  <a href="https://instagram.com/nlc.ufpe" target="_blank" class="insta-btn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/></svg>
+    Siga no Instagram
+  </a>
+  <div class="footer-copy">Núcleo de Línguas e Culturas – UFPE</div>
 </footer>
 
 <script>
+const colors=['#f7941d','#4dc8c8','#5aaa1e','#e07f0a','#0a9e8a','#c87c00','#3d8a00','#e05a00','#007a6e'];
+
 const data={
   ingles:{name:'Inglês',levels:[
     {code:'A1.1',name:'Básico 1',t:[
@@ -218,28 +232,29 @@ const data={
     {code:'Nível 2',name:'Básico 2',t:[{d:'3ª e 5ª',h:'19:30–21:30',m:'Remota'}]},
     {code:'Nível 3',name:'Intermediário 1',t:[{d:'6ª e Sáb',h:'19:30–21:30',m:'Remota'}]},
   ]},
-  portugues:{name:'Português para Estrangeiros',soon:true},
+  portugues:{name:'Português para Estrangeiros',levels:[
+    {code:'Nível 1',name:'Básico 1',t:[{d:'2ª e 4ª',h:'13h–15h',m:'Presencial'}]},
+    {code:'Nível 2',name:'Básico 2',t:[{d:'2ª e 4ª',h:'15h–17h',m:'Presencial'}]},
+  ]},
 };
-
-const colors=['#f7941d','#4dc8c8','#5aaa1e','#e07f0a','#0a9e8a','#c87c00','#3d8a00','#e05a00','#007a6e'];
 
 function showDetail(id){
   const d=data[id];
   document.getElementById('home').style.display='none';
-  document.getElementById('detail').style.display='block';
+  const det=document.getElementById('detail');
+  det.style.display='block';
+  det.classList.remove('fade');
+  void det.offsetWidth;
+  det.classList.add('fade');
   document.getElementById('d-title').textContent=d.name;
-  const body=document.getElementById('d-body');
-  if(d.soon){
-    body.innerHTML=`<div class="soon-msg">As turmas de <strong>Português para Estrangeiros</strong> são ofertadas sob demanda.<br>Acesse o Linktree para verificar disponibilidade e se inscrever.</div>`;
-    return;
-  }
   let html='';
   d.levels.forEach((lv,i)=>{
-    if(i>0) html+='<hr class="divider">';
     const c=colors[i%colors.length];
     html+=`<div class="level-block">
-      <div class="level-code" style="background:${c}22;color:${c}">${lv.code}</div>
-      <div class="level-name">${lv.name}</div>
+      <div class="level-top">
+        <span class="level-code" style="background:${c}20;color:${c}">${lv.code}</span>
+        <span class="level-name">${lv.name}</span>
+      </div>
       <div class="turmas-row">`;
     lv.t.forEach(t=>{
       const cls=t.m==='Presencial'?'mod-p':'mod-r';
@@ -251,12 +266,18 @@ function showDetail(id){
     });
     html+=`</div></div>`;
   });
-  body.innerHTML=html;
+  document.getElementById('d-body').innerHTML=html;
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function goBack(){
   document.getElementById('detail').style.display='none';
-  document.getElementById('home').style.display='block';
+  const home=document.getElementById('home');
+  home.style.display='block';
+  home.classList.remove('fade');
+  void home.offsetWidth;
+  home.classList.add('fade');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 </body>
