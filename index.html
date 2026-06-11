@@ -3,282 +3,1050 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NLC UFPE – Turmas 2026.1</title>
+<title>NLC UFPE – Calendário 2026.2</title>
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',system-ui,sans-serif;background:#eef0ee;color:#1a1a1a;min-height:100vh}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* HEADER */
-  header{background:#fff;border-bottom:1px solid #e4e4e4;padding:1.4rem 2rem;display:flex;flex-direction:column;align-items:center;gap:.45rem}
-  .logo-img{height:64px;width:auto}
-  .header-name{color:#aaa;font-size:.7rem;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #eef0ee; color: #1a1a1a; min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
 
-  /* MAIN */
-  main{max-width:860px;margin:0 auto;padding:2.8rem 1.4rem}
+  /* ── HEADER ── */
+  header {
+    background: #fff; border-bottom: 1px solid #e4e4e4;
+    padding: 1.25rem 2rem;
+    display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  }
+  .logo-wrap { height: 60px; display: flex; align-items: center; justify-content: center; }
+  .logo-img { height: 60px; width: auto; object-fit: contain; display: block; }
+  .header-name {
+    color: #b0b0b0; font-size: .68rem; font-weight: 600;
+    letter-spacing: .9px; text-transform: uppercase; text-align: center;
+  }
 
-  /* HOME */
-  .home-intro{text-align:center;margin-bottom:2.2rem}
-  .home-intro h2{font-size:1.35rem;font-weight:700;color:#1a1a1a;margin-bottom:.4rem}
-  .home-intro p{font-size:.88rem;color:#aaa;font-weight:400}
+  /* ── MAIN ── */
+  main { max-width: 860px; margin: 0 auto; padding: 2.5rem 1.25rem 3rem; }
 
-  .lang-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
-  @media(max-width:560px){.lang-grid{grid-template-columns:repeat(2,1fr)}}
+  /* ── INTRO ── */
+  .home-intro { text-align: center; margin-bottom: 2rem; }
+  .home-intro h1 { font-size: 1.3rem; font-weight: 800; color: #1a1a1a; margin-bottom: .35rem; }
+  .home-intro p { font-size: .85rem; color: #777; }
 
-  .lang-card{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;transition:box-shadow .2s,transform .18s;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-  .lang-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.10);transform:translateY(-3px)}
-  .lang-accent{height:8px;width:100%}
-  .lang-card-body{padding:1.2rem 1.1rem 1.1rem;display:flex;flex-direction:column;gap:.35rem}
-  .lang-card-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem}
-  .lang-name{font-size:1rem;font-weight:700;color:#1a1a1a;line-height:1.25}
-  .lang-arrow{color:#ddd;font-size:1.1rem;flex-shrink:0;transition:color .2s,transform .2s}
-  .lang-card:hover .lang-arrow{color:#f7941d;transform:translateX(3px)}
-  .lang-levels{font-size:.72rem;color:#bbb;line-height:1.4}
+  /* ── GRID ── */
+  .sec-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; margin-bottom: 1rem;
+  }
+  @media (max-width: 520px) { .sec-grid { grid-template-columns: 1fr; } }
 
-  /* DETAIL */
-  #detail{display:none}
-  .back-btn{background:#fff;border:1.5px solid #e4e4e4;color:#555;font-size:.84rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2rem;padding:.6rem 1.1rem;border-radius:10px;transition:border-color .2s,color .2s;box-shadow:0 1px 3px rgba(0,0,0,.05)}
-  .back-btn:hover{border-color:#f7941d;color:#f7941d}
-  .detail-title{font-size:1.5rem;font-weight:800;color:#1a1a1a;margin-bottom:1.6rem;line-height:1.2}
+  /* ── CARDS ── */
+  .sec-card {
+    background: #fff; border-radius: 16px; overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow .2s, transform .18s, border-color .2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,.07);
+    border: 1.5px solid transparent;
+    display: flex; flex-direction: column;
+    min-height: 120px;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+  }
+  .sec-card:hover  {
+    box-shadow: 0 8px 28px rgba(0,0,0,.11);
+    transform: translateY(-3px);
+    border-color: #e8e8e8;
+  }
+  .sec-card:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0,0,0,.08); }
+  .sec-card:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(247,148,29,.35);
+    border-color: #f7941d;
+  }
 
-  .level-block{background:#fff;border-radius:16px;padding:1.3rem 1.4rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-  .level-top{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
-  .level-code{font-size:.7rem;font-weight:800;padding:.25rem .65rem;border-radius:20px;letter-spacing:.3px}
-  .level-name{font-size:1rem;font-weight:700;color:#1a1a1a}
+  .sec-accent { height: 7px; width: 100%; flex-shrink: 0; }
+  .sec-card-body {
+    padding: 1.2rem 1.1rem 1.1rem;
+    display: flex; flex-direction: column;
+    justify-content: space-between; flex: 1; gap: .5rem;
+  }
+  .sec-card-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: .5rem;
+  }
+  .sec-name { font-size: .97rem; font-weight: 700; color: #1a1a1a; line-height: 1.3; flex: 1; }
+  .sec-arrow {
+    color: #d8d8d8; font-size: 1.2rem; line-height: 1;
+    flex-shrink: 0; margin-top: .05rem;
+    transition: color .2s, transform .2s;
+  }
+  .sec-card:hover .sec-arrow { color: #f7941d; transform: translateX(3px); }
 
-  .turmas-row{display:flex;flex-wrap:wrap;gap:.6rem}
-  .turma-chip{background:#f9f9f9;border:1px solid #eee;border-radius:12px;padding:.75rem 1rem;flex:1;min-width:140px}
-  .chip-dia{font-size:.85rem;font-weight:700;color:#1a1a1a}
-  .chip-hora{font-size:.78rem;color:#888;margin-top:.15rem}
-  .chip-mod{display:inline-block;margin-top:.5rem;font-size:.68rem;font-weight:700;padding:.18rem .55rem;border-radius:20px}
-  .mod-p{background:#fff3e0;color:#d4720a}
-  .mod-r{background:#e0f7f4;color:#0a8a7a}
+  .sec-dates { display: flex; align-items: center; gap: .4rem; flex-wrap: wrap; }
+  .sec-date-chip {
+    font-size: .7rem; font-weight: 600;
+    padding: .22rem .65rem; border-radius: 20px;
+    background: #f4f4f4; color: #555; white-space: nowrap;
+  }
+  .sec-sub { font-size: .72rem; color: #999; line-height: 1.45; margin-top: .1rem; }
 
-  /* CTA */
-  .cta-bar{background:#fff;border-radius:16px;padding:1.4rem 1.6rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:2rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
-  .cta-bar p{font-size:.88rem;color:#777;line-height:1.6}
-  .cta-bar strong{color:#1a1a1a;display:block;font-size:.95rem;margin-bottom:.1rem}
-  .cta-link{background:#f7941d;color:#fff;font-weight:700;font-size:.9rem;padding:.75rem 1.5rem;border-radius:10px;text-decoration:none;white-space:nowrap;transition:background .2s;box-shadow:0 2px 8px rgba(247,148,29,.3)}
-  .cta-link:hover{background:#e07f0a}
+  /* ── CARD DESTAQUE ── */
+  .destaque-datas-grid {
+    display: flex; flex-wrap: wrap; gap: .4rem 1.8rem;
+  }
+  .destaque-data-item { display: flex; flex-direction: column; gap: .08rem; }
+  .destaque-data-label {
+    font-size: .63rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .5px; color: #7ab85a;
+  }
+  .destaque-data-valor { font-size: .87rem; font-weight: 700; color: #1a1a1a; }
+  @media (max-width: 520px) {
+          }
 
-  /* FOOTER */
-  footer{text-align:center;padding:2rem 1rem;border-top:1px solid #e4e4e4;margin-top:2rem;background:#fff}
-  .insta-btn{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;font-weight:700;font-size:.92rem;padding:.8rem 1.8rem;border-radius:10px;margin-bottom:.9rem;box-shadow:0 3px 12px rgba(220,39,67,.25);transition:opacity .2s}
-  .insta-btn:hover{opacity:.88}
-  .footer-copy{font-size:.72rem;color:#ccc}
+  /* ── DETALHE ── */
+  #detail { display: none; }
 
-  /* Animação */
-  .fade{animation:fadeIn .22s ease}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .back-btn {
+    background: #fff; border: 1.5px solid #e4e4e4; color: #555;
+    font-size: .83rem; font-weight: 600; cursor: pointer;
+    display: inline-flex; align-items: center; gap: .45rem;
+    margin-bottom: 1.8rem; padding: .7rem 1.2rem;
+    border-radius: 10px;
+    transition: border-color .2s, color .2s, box-shadow .2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.05);
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px; /* área de toque mínima recomendada */
+  }
+  .back-btn svg { flex-shrink: 0; pointer-events: none; }
+  .back-btn:hover { border-color: #f7941d; color: #f7941d; box-shadow: 0 2px 8px rgba(247,148,29,.15); }
+  .back-btn:active { transform: scale(.97); }
+  .back-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(247,148,29,.35); border-color: #f7941d; }
+
+  /* ── CABEÇALHO DO DETALHE ── */
+  .detail-header { margin-bottom: 1.6rem; }
+  .detail-eyebrow {
+    font-size: .68rem; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; color: #f7941d; margin-bottom: .35rem;
+  }
+  .detail-title {
+    font-size: 1.4rem; font-weight: 800; color: #1a1a1a;
+    line-height: 1.2; margin-bottom: .3rem;
+  }
+  .detail-sub { font-size: .84rem; color: #999; }
+
+  /* ── BLOCOS ── */
+  .content-block {
+    background: #fff; border-radius: 16px;
+    padding: 1.4rem; margin-bottom: 1rem;
+    box-shadow: 0 1px 5px rgba(0,0,0,.06);
+  }
+  .content-block-matricula {
+    background: #f4fbf1; border: 1.5px solid #c8eebc;
+    display: flex; align-items: center;
+    justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .matricula-info-label {
+    font-size: .68rem; font-weight: 700; letter-spacing: .6px;
+    text-transform: uppercase; color: #3d8a00; margin-bottom: .3rem;
+  }
+  .matricula-info-datas { font-size: 1rem; font-weight: 800; color: #1a1a1a; margin-bottom: .2rem; }
+  .matricula-info-desc { font-size: .8rem; color: #555; }
+
+  /* Botão matrícula desabilitado */
+  .btn-matricula-disabled {
+    display: inline-flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: .2rem;
+    background: #f0f0f0; color: #aaa;
+    font-size: .84rem; font-weight: 700;
+    padding: .8rem 1.4rem; border-radius: 10px;
+    border: 1.5px solid #e4e4e4;
+    cursor: not-allowed; white-space: nowrap;
+    min-height: 56px; text-align: center;
+  }
+  .btn-matricula-disabled span { font-size: .7rem; font-weight: 500; color: #bbb; }
+
+  /* Botão matrícula ativo (para quando tiver link) */
+  .btn-matricula {
+    display: inline-flex; align-items: center; gap: .5rem;
+    background: #5aaa1e; color: #fff;
+    font-size: .88rem; font-weight: 700;
+    padding: .82rem 1.5rem; border-radius: 10px;
+    text-decoration: none; white-space: nowrap;
+    border: none; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(90,170,30,.3);
+    transition: background .18s, transform .15s, box-shadow .18s;
+    min-height: 44px;
+  }
+  .btn-matricula:hover { background: #4a9010; box-shadow: 0 4px 16px rgba(90,170,30,.35); }
+  .btn-matricula:active { transform: scale(.97); }
+  .btn-matricula:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(90,170,30,.4); }
+  .btn-matricula svg { flex-shrink: 0; pointer-events: none; }
+
+  .block-title {
+    font-size: .72rem; font-weight: 700; letter-spacing: .6px;
+    text-transform: uppercase; color: #bbb;
+    margin-bottom: 1rem; padding-bottom: .6rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    background: #fffbf5; border: 1.5px solid #fde8c8;
+    border-radius: 12px; padding: .9rem 1.1rem; margin-bottom: 1.2rem;
+    display: flex; align-items: flex-start; gap: .6rem;
+  }
+  .info-box-icon { flex-shrink: 0; margin-top: .15rem; color: #d4820a; }
+  .info-box p { font-size: .81rem; color: #8a5800; line-height: 1.65; }
+
+  /* ── LINK BOX (nivelamento) ── */
+  .link-box {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; flex-wrap: wrap;
+    background: #f9f9f9; border-radius: 12px;
+    padding: .9rem 1.1rem; margin-bottom: 1.2rem;
+  }
+  .link-box p { font-size: .82rem; color: #555; line-height: 1.5; }
+  .link-box strong { color: #1a1a1a; display: block; margin-bottom: .1rem; font-size: .86rem; }
+  .link-box a {
+    font-size: .82rem; font-weight: 700; color: #f7941d;
+    text-decoration: none; white-space: nowrap;
+    padding: .6rem 1.1rem; border-radius: 8px;
+    background: #fff3e0; border: 1.5px solid #fde5b8;
+    transition: background .18s, box-shadow .18s;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .link-box a:hover { background: #fde8c4; box-shadow: 0 2px 8px rgba(247,148,29,.2); }
+  .link-box a:active { transform: scale(.97); }
+  .link-box a:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(247,148,29,.35); }
+
+  /* ── TABELAS ── */
+  .datas-table { width: 100%; border-collapse: collapse; }
+  .datas-table tr { border-bottom: 1px solid #f2f2f2; }
+  .datas-table tr:last-child { border-bottom: none; }
+  .datas-table td { padding: .78rem .4rem; font-size: .84rem; line-height: 1.45; vertical-align: middle; }
+  .td-data { font-weight: 700; color: #1a1a1a; width: 38%; padding-right: .75rem; }
+  .td-dia { font-size: .69rem; color: #bbb; font-weight: 400; display: block; margin-top: .08rem; }
+  .td-evento { color: #444; }
+  .row-marco { background: #f8fff4; }
+  .row-marco .td-data { color: #3d8a00; }
+  .row-marco .td-evento { color: #2d6600; font-weight: 600; }
+
+  .nivel-table { width: 100%; border-collapse: collapse; }
+  .nivel-table th {
+    font-size: .7rem; font-weight: 700; letter-spacing: .5px;
+    text-transform: uppercase; color: #aaa;
+    padding: 0 .4rem .7rem; text-align: left;
+    border-bottom: 2px solid #f0f0f0;
+  }
+  .nivel-table td {
+    padding: .65rem .4rem; font-size: .84rem;
+    border-bottom: 1px solid #f5f5f5; vertical-align: middle;
+  }
+  .nivel-table tr:last-child td { border-bottom: none; }
+  .nivel-table .col-prova { font-weight: 700; color: #1a1a1a; }
+  .nivel-table .col-result { color: #555; }
+
+  /* ── HORÁRIOS ── */
+  .horario-row {
+    display: flex; align-items: center; gap: .75rem;
+    padding: .65rem 0; border-bottom: 1px solid #f5f5f5; font-size: .84rem;
+  }
+  .horario-row:last-child { border-bottom: none; }
+  .horario-hora { font-weight: 700; color: #1a1a1a; flex: 0 0 130px; }
+  .horario-idioma { color: #555; flex: 1; }
+  .horario-badge {
+    font-size: .67rem; font-weight: 700; padding: .22rem .65rem;
+    border-radius: 20px; white-space: nowrap; flex-shrink: 0;
+  }
+  .badge-online     { background: #e0f7f4; color: #076e65; }
+  .badge-presencial { background: #fff3e0; color: #b85e00; }
+
+  /* ── CTA BAR ── */
+  .cta-bar {
+    background: #fff; border-radius: 16px;
+    padding: 1.3rem 1.5rem;
+    display: flex; align-items: center;
+    justify-content: space-between; gap: 1rem;
+    flex-wrap: wrap; margin-top: 2rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,.05);
+  }
+  .cta-bar p { font-size: .87rem; color: #777; line-height: 1.55; }
+  .cta-bar strong { color: #1a1a1a; display: block; font-size: .93rem; margin-bottom: .1rem; }
+  .cta-link {
+    background: #f7941d; color: #fff;
+    font-weight: 700; font-size: .88rem;
+    padding: .78rem 1.5rem; border-radius: 10px;
+    text-decoration: none; white-space: nowrap;
+    transition: background .18s, transform .15s, box-shadow .18s;
+    box-shadow: 0 2px 8px rgba(247,148,29,.3);
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px; display: inline-flex; align-items: center;
+  }
+  .cta-link:hover { background: #e07f0a; box-shadow: 0 4px 16px rgba(247,148,29,.35); }
+  .cta-link:active { transform: scale(.97); }
+  .cta-link:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(247,148,29,.45); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2rem 1rem;
+    border-top: 1px solid #e8e8e8; margin-top: 2rem; background: #fff;
+  }
+  .insta-btn {
+    display: inline-flex; align-items: center; gap: .55rem;
+    text-decoration: none;
+    background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);
+    color: #fff; font-weight: 700; font-size: .9rem;
+    padding: .82rem 1.8rem; border-radius: 10px; margin-bottom: .85rem;
+    box-shadow: 0 3px 12px rgba(220,39,67,.22);
+    transition: opacity .2s, transform .15s;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+  .insta-btn svg { flex-shrink: 0; pointer-events: none; }
+  .insta-btn:hover { opacity: .88; }
+  .insta-btn:active { transform: scale(.97); }
+  .insta-btn:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(220,39,67,.4); opacity: .88; }
+  .footer-copy { font-size: .7rem; color: #bbb; }
+
+  /* ── TURMAS DO INTENSIVO ── */
+  .turmas-secao { margin-bottom: 1rem; }
+
+  /* Header do idioma */
+  .turmas-idioma-header {
+    display: flex; align-items: center; gap: .75rem;
+    padding: .85rem 1.1rem;
+    border-radius: 12px 12px 0 0;
+    margin-bottom: 0;
+  }
+  .turmas-idioma-icon {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .turmas-idioma-nome {
+    font-size: .95rem; font-weight: 800; color: #fff; flex: 1;
+  }
+  .turmas-idioma-count {
+    font-size: .72rem; font-weight: 600;
+    background: rgba(255,255,255,.22);
+    color: #fff; padding: .18rem .6rem;
+    border-radius: 20px; white-space: nowrap;
+  }
+
+  /* Container de níveis */
+  .turmas-niveis {
+    background: #fff;
+    border-radius: 0 0 14px 14px;
+    border: 1.5px solid #ebebeb;
+    border-top: none;
+    overflow: hidden;
+  }
+
+  /* Cada nível */
+  .turma-nivel {
+    padding: .9rem 1.1rem;
+    border-bottom: 1px solid #f3f3f3;
+  }
+  .turma-nivel:last-child { border-bottom: none; }
+
+  .turma-nivel-header {
+    display: flex; align-items: center; gap: .6rem;
+    margin-bottom: .6rem;
+  }
+  .turma-nivel-badge {
+    font-size: .68rem; font-weight: 800;
+    padding: .2rem .65rem; border-radius: 20px;
+    letter-spacing: .2px; white-space: nowrap;
+  }
+  .turma-nivel-nome {
+    font-size: .82rem; font-weight: 600; color: #555;
+  }
+
+  /* Chips de horário */
+  .turma-horarios { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .turma-horario-chip {
+    display: inline-flex; align-items: center; gap: .4rem;
+    padding: .38rem .75rem; border-radius: 10px;
+    font-size: .79rem; font-weight: 600; border: 1.5px solid;
+  }
+  .chip-remota {
+    background: #f0fdf9; color: #076e65;
+    border-color: #b2e8e2;
+  }
+  .chip-presencial {
+    background: #fff8f0; color: #b85e00;
+    border-color: #fdd9a8;
+  }
+  .chip-dot {
+    width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+  }
+  .chip-remota .chip-dot    { background: #0a9e8a; }
+  .chip-presencial .chip-dot { background: #d4720a; }
+
+  .sec-destaque-matricula {
+    font-size: .84rem; font-weight: 600; color: #b85e00;
+    margin-top: .6rem;
+  }
+  .sec-destaque-idiomas {
+    display: flex; flex-wrap: wrap; gap: .35rem;
+    margin-top: .55rem;
+  }
+  .sec-destaque-idiomas span {
+    font-size: .72rem; font-weight: 600;
+    padding: .22rem .7rem; border-radius: 20px;
+    background: #edfbf0; color: #1a7a3a;
+    border: 1px solid #c8eebc;
+  }
+  .sec-destaque-cta {
+    display: inline-flex; align-items: center;
+    margin-top: .75rem;
+    font-size: .82rem; font-weight: 700;
+    color: #5aaa1e;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color .2s;
+  }
+
+  /* ── TURMAS REESTRUTURADAS ── */
+  .turmas-section-header {
+    display: flex; align-items: baseline; gap: .6rem;
+    margin-bottom: 1.2rem; padding-bottom: .7rem;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .turmas-section-title {
+    font-size: .95rem; font-weight: 800; color: #1a1a1a;
+  }
+  .turmas-section-sub {
+    font-size: .75rem; color: #aaa; font-weight: 500;
+  }
+
+  .turmas-idiomas-grid {
+    display: flex; flex-direction: column; gap: 1.2rem;
+  }
+
+  /* Card por idioma */
+  .turma-idioma-card {
+    border: 1.5px solid #ebebeb; border-radius: 12px; overflow: hidden;
+  }
+  .turma-idioma-topo {
+    padding: .7rem 1rem;
+    background: #fafafa;
+    border-bottom: 1px solid #ebebeb;
+  }
+  .turma-idioma-nome {
+    font-size: .95rem; font-weight: 800;
+  }
+
+  /* Níveis dentro do card */
+  .turma-idioma-niveis {
+    display: flex; flex-direction: column;
+  }
+  .turma-nivel-card {
+    padding: .8rem 1rem;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .turma-nivel-card:last-child { border-bottom: none; }
+
+  .turma-nivel-topo {
+    display: flex; align-items: center; gap: .6rem;
+    margin-bottom: .55rem;
+  }
+  .turma-nivel-cod {
+    font-size: .68rem; font-weight: 800;
+    padding: .18rem .6rem; border-radius: 6px;
+    letter-spacing: .3px; white-space: nowrap;
+  }
+  .turma-nivel-fullname {
+    font-size: .84rem; font-weight: 600; color: #333;
+  }
+
+  /* Legenda das modalidades */
+  .turmas-legenda {
+    display: flex; flex-wrap: wrap; gap: .5rem 1.5rem;
+    margin-bottom: 1.2rem;
+    padding: .7rem .9rem;
+    background: #fafafa; border-radius: 10px;
+  }
+  .legenda-item {
+    display: inline-flex; align-items: center; gap: .45rem;
+    font-size: .76rem; color: #555;
+  }
+  .legenda-dot {
+    width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0;
+  }
+  .dot-presencial { background: #f59e0b; }
+  .dot-remota     { background: #0ea5e9; }
+
+  /* Tickets de turma */
+  .turma-tickets {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+  }
+  .turma-tickets + .turma-tickets { margin-top: .5rem; }
+  .turma-ticket {
+    display: flex; flex-direction: column; gap: .15rem;
+    padding: .55rem .85rem .5rem;
+    border-radius: 10px;
+    border: 1.5px solid;
+    border-left-width: 4px;
+    min-width: 118px;
+  }
+  .ticket-hora {
+    font-size: .92rem; font-weight: 800; color: #1a1a1a;
+    letter-spacing: .2px;
+  }
+  .ticket-mod {
+    font-size: .68rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .4px;
+  }
+  .ticket-presencial {
+    background: #fffbf2; border-color: #fde2b0;
+    border-left-color: #f59e0b;
+  }
+  .ticket-presencial .ticket-mod { color: #b45309; }
+  .ticket-remota {
+    background: #f4fbff; border-color: #c0e6f7;
+    border-left-color: #0ea5e9;
+  }
+  .ticket-remota .ticket-mod { color: #0369a1; }
+
+  /* ── HERO INTENSIVO ── */
+  .hero-intensivo {
+    background: linear-gradient(160deg, #f2faec 0%, #e8f6df 100%);
+    border: 1.5px solid #d4edcc;
+    border-radius: 20px;
+    padding: 1.8rem 1.6rem 1.6rem;
+    margin-bottom: 1.8rem;
+  }
+  .hero-eyebrow {
+    font-size: .68rem; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: #3d8a00;
+    margin-bottom: .4rem;
+  }
+  .hero-titulo {
+    font-size: 1.65rem; font-weight: 800; color: #1a1a1a;
+    line-height: 1.1; margin-bottom: .45rem;
+    letter-spacing: -.02em;
+  }
+  .hero-datas {
+    font-size: .87rem; color: #4a6840; margin-bottom: 1.3rem;
+  }
+  .hero-datas strong { color: #2d6600; font-weight: 800; }
+
+  .hero-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .9rem;
+  }
+  @media (max-width: 560px) { .hero-cards { grid-template-columns: 1fr; } }
+
+  .hero-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 1.1rem 1.15rem;
+    display: flex; align-items: center; gap: .9rem;
+    cursor: pointer;
+    border: 1.5px solid rgba(90,170,30,.12);
+    box-shadow: 0 1px 4px rgba(45,102,0,.06);
+    transition: box-shadow .2s, transform .18s, border-color .2s;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    min-height: 76px;
+  }
+  .hero-card:hover {
+    box-shadow: 0 8px 24px rgba(45,102,0,.13);
+    transform: translateY(-2px);
+    border-color: #5aaa1e;
+  }
+  .hero-card:active { transform: translateY(0); }
+  .hero-card:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(90,170,30,.35);
+    border-color: #5aaa1e;
+  }
+
+  .hero-card-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: #5aaa1e; color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .hero-card-icon svg { pointer-events: none; }
+
+  .hero-card-info { flex: 1; min-width: 0; }
+  .hero-card-titulo {
+    font-size: .95rem; font-weight: 800; color: #1a1a1a;
+    line-height: 1.2; margin-bottom: .15rem;
+  }
+  .hero-card-sub {
+    font-size: .74rem; color: #888; line-height: 1.4;
+  }
+  .hero-card-arrow {
+    color: #c4ddb4; font-size: 1.4rem; line-height: 1;
+    flex-shrink: 0;
+    transition: color .2s, transform .2s;
+  }
+  .hero-card:hover .hero-card-arrow { color: #5aaa1e; transform: translateX(3px); }
+
+  /* ── LABEL OUTRAS DATAS ── */
+  .outras-datas-label {
+    font-size: .7rem; font-weight: 700; letter-spacing: .8px;
+    text-transform: uppercase; color: #aaa;
+    margin-bottom: .8rem; padding-left: .2rem;
+  }
+
+  /* ── ANIMAÇÃO ── */
+  .fade { animation: fadeIn .22s ease both; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <img src="https://i.imgur.com/aHF0yiS.png" class="logo-img" alt="NLC – fale com o mundo">
+  <div class="logo-wrap">
+    <img src="data:image/png;base64,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" class="logo-img" alt="NLC UFPE – Fale com o mundo">
+  </div>
   <div class="header-name">Núcleo de Línguas e Culturas — UFPE</div>
 </header>
 
 <main>
+  <!-- HOME -->
   <div id="home">
     <div class="home-intro">
-      <h2>Turmas disponíveis</h2>
-      <p>Selecione um idioma para ver os horários</p>
+      <h1>Calendário 2026.2</h1>
+      <p>Selecione uma seção para ver as datas</p>
     </div>
 
-    <div class="lang-grid">
-      <div class="lang-card" onclick="showDetail('ingles')">
-        <div class="lang-accent" style="background:#f7941d"></div>
-        <div class="lang-card-body">
-          <div class="lang-card-top"><span class="lang-name">Inglês</span><span class="lang-arrow">›</span></div>
-          <div class="lang-levels">A1 · A2 · B1 · B2 · Instrumental</div>
+    <!-- HERO: Intensivo Julho 2026 -->
+    <section class="hero-intensivo" aria-labelledby="hero-titulo">
+      <p class="hero-eyebrow">Próximo evento</p>
+      <h2 id="hero-titulo" class="hero-titulo">Intensivo Julho 2026</h2>
+      <p class="hero-datas">Aulas de 13/07 a 07/08 · Matrículas abrem em <strong>15/06</strong></p>
+
+      <div class="hero-cards">
+
+        <!-- Turmas e horários -->
+        <div class="hero-card" onclick="showDetail('intensivo_turmas')" role="button" tabindex="0" aria-label="Ver turmas e horários do Intensivo Julho 2026">
+          <div class="hero-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="hero-card-info">
+            <h3 class="hero-card-titulo">Turmas e horários</h3>
+            <p class="hero-card-sub">Inglês · Francês · Espanhol · Alemão</p>
+          </div>
+          <span class="hero-card-arrow" aria-hidden="true">›</span>
+        </div>
+
+        <!-- Calendário -->
+        <div class="hero-card" onclick="showDetail('intensivo_cal')" role="button" tabindex="0" aria-label="Ver calendário e datas do Intensivo Julho 2026">
+          <div class="hero-card-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="hero-card-info">
+            <h3 class="hero-card-titulo">Calendário e datas</h3>
+            <p class="hero-card-sub">Matrículas, início e fim das aulas</p>
+          </div>
+          <span class="hero-card-arrow" aria-hidden="true">›</span>
+        </div>
+
+      </div>
+    </section>
+
+    <p class="outras-datas-label">Outras datas do semestre</p>
+
+    <div class="sec-grid">
+
+      <!-- Nivelamento -->
+      <div class="sec-card" onclick="showDetail('nivelamento')" role="button" tabindex="0" aria-label="Provas de Nivelamento">
+        <div class="sec-accent" style="background:#4dc8c8"></div>
+        <div class="sec-card-body">
+          <div class="sec-card-top">
+            <span class="sec-name">Provas de Nivelamento</span>
+            <span class="sec-arrow">›</span>
+          </div>
+          <div class="sec-dates">
+            <span class="sec-date-chip">29/06 – 27/07</span>
+            <span class="sec-date-chip">Toda segunda-feira</span>
+          </div>
         </div>
       </div>
-      <div class="lang-card" onclick="showDetail('frances')">
-        <div class="lang-accent" style="background:#4dc8c8"></div>
-        <div class="lang-card-body">
-          <div class="lang-card-top"><span class="lang-name">Francês</span><span class="lang-arrow">›</span></div>
-          <div class="lang-levels">A1 · A2</div>
+
+      <!-- Regular -->
+      <div class="sec-card" onclick="showDetail('regular')" role="button" tabindex="0" aria-label="Curso Regular">
+        <div class="sec-accent" style="background:#f7941d"></div>
+        <div class="sec-card-body">
+          <div class="sec-card-top">
+            <span class="sec-name">Curso Regular</span>
+            <span class="sec-arrow">›</span>
+          </div>
+          <div class="sec-dates">
+            <span class="sec-date-chip">19/08 – 12/12</span>
+          </div>
+          <div class="sec-sub">Matrículas: 15/07 a 15/08</div>
         </div>
       </div>
-      <div class="lang-card" onclick="showDetail('espanhol')">
-        <div class="lang-accent" style="background:#f5d14a"></div>
-        <div class="lang-card-body">
-          <div class="lang-card-top"><span class="lang-name">Espanhol</span><span class="lang-arrow">›</span></div>
-          <div class="lang-levels">A1 · A2 · B2</div>
-        </div>
-      </div>
-      <div class="lang-card" onclick="showDetail('alemao')">
-        <div class="lang-accent" style="background:#5aaa1e"></div>
-        <div class="lang-card-body">
-          <div class="lang-card-top"><span class="lang-name">Alemão</span><span class="lang-arrow">›</span></div>
-          <div class="lang-levels">A1 · A2 · B1</div>
-        </div>
-      </div>
-      <div class="lang-card" onclick="showDetail('japones')">
-        <div class="lang-accent" style="background:#f7941d"></div>
-        <div class="lang-card-body">
-          <div class="lang-card-top"><span class="lang-name">Japonês</span><span class="lang-arrow">›</span></div>
-          <div class="lang-levels">Básico · Intermediário</div>
-        </div>
-      </div>
-      <div class="lang-card" onclick="showDetail('portugues')">
-        <div class="lang-accent" style="background:#4dc8c8"></div>
-        <div class="lang-card-body">
-          <div class="lang-card-top"><span class="lang-name">Português para Estrangeiros</span><span class="lang-arrow">›</span></div>
-          <div class="lang-levels">Básico 1 · Básico 2</div>
-        </div>
-      </div>
+
+
     </div>
 
     <div class="cta-bar">
-      <p><strong>Matrículas, calendário e outras informações</strong>Acesse nosso Linktree para mais detalhes.</p>
-      <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">linktr.ee/nlcufpe</a>
+      <p><strong>Dúvidas sobre o calendário?</strong>Atendimento seg. a sex. das 8h às 21h · sáb. das 8h às 12h.</p>
+      <a href="https://wa.me/message/OSXQDPCI4R6EK1" target="_blank" rel="noopener" class="cta-link">Falar no WhatsApp</a>
     </div>
   </div>
 
+  <!-- DETALHE -->
   <div id="detail">
-    <button class="back-btn" onclick="goBack()">&#8592; Voltar aos idiomas</button>
-    <div id="d-title" class="detail-title"></div>
+    <button class="back-btn" onclick="goBack()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Voltar ao calendário
+    </button>
+    <div class="detail-header">
+      <p class="detail-eyebrow">Calendário NLC 2026.2</p>
+      <h1 id="d-title" class="detail-title"></h1>
+      <div id="d-sub" class="detail-sub"></div>
+    </div>
     <div id="d-body"></div>
     <div class="cta-bar">
-      <p><strong>Matrículas, calendário e outras informações</strong>Acesse nosso Linktree para mais detalhes.</p>
-      <a href="https://linktr.ee/nlcufpe" target="_blank" class="cta-link">linktr.ee/nlcufpe</a>
+      <p><strong>Dúvidas?</strong>Atendimento seg. a sex. das 8h às 21h · sáb. das 8h às 12h.</p>
+      <a href="https://wa.me/message/OSXQDPCI4R6EK1" target="_blank" rel="noopener" class="cta-link">Falar no WhatsApp</a>
     </div>
   </div>
 </main>
 
 <footer>
-  <a href="https://instagram.com/nlc.ufpe" target="_blank" class="insta-btn">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/></svg>
+  <a href="https://instagram.com/nlc.ufpe" target="_blank" rel="noopener" class="insta-btn" aria-label="Seguir o NLC UFPE no Instagram (abre em nova aba)">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="2" width="20" height="20" rx="5"/>
+      <circle cx="12" cy="12" r="4"/>
+      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+    </svg>
     Siga no Instagram
   </a>
   <div class="footer-copy">Núcleo de Línguas e Culturas – UFPE</div>
 </footer>
 
 <script>
-const colors=['#f7941d','#4dc8c8','#5aaa1e','#e07f0a','#0a9e8a','#c87c00','#3d8a00','#e05a00','#007a6e'];
+const ICON_INFO = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events:none"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
 
-const data={
-  ingles:{name:'Inglês',levels:[
-    {code:'A1.1',name:'Básico 1',t:[
-      {d:'2ª e 4ª',h:'15h–17h',m:'Presencial'},{d:'3ª e 5ª',h:'19h–21h',m:'Presencial'},
-      {d:'Sexta',h:'08h–12h',m:'Presencial'},{d:'2ª e 4ª',h:'17h–19h',m:'Remota'},
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-    ]},
-    {code:'A1.2',name:'Básico 2',t:[
-      {d:'2ª e 4ª',h:'15h–17h',m:'Presencial'},{d:'Sexta',h:'08h–12h',m:'Presencial'},
-      {d:'Sábado',h:'08h–12h',m:'Presencial'},{d:'2ª e 4ª',h:'17h–19h',m:'Remota'},
-      {d:'3ª e 5ª',h:'19h–21h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-    ]},
-    {code:'A2.1',name:'Intermediário 1',t:[
-      {d:'2ª e 4ª',h:'15h–17h',m:'Presencial'},{d:'3ª e 5ª',h:'19h–21h',m:'Presencial'},
-      {d:'Sexta',h:'08h–12h',m:'Presencial'},{d:'Sábado',h:'08h–12h',m:'Presencial'},
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'3ª e 5ª',h:'15h–17h',m:'Remota'},
-      {d:'3ª e 5ª',h:'19h–21h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-    ]},
-    {code:'A2.2',name:'Intermediário 2',t:[
-      {d:'Sexta',h:'08h–12h',m:'Presencial'},{d:'Sábado',h:'08h–12h',m:'Presencial'},
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-    ]},
-    {code:'B1.1',name:'Pós-intermediário 1',t:[
-      {d:'Sexta',h:'08h–12h',m:'Presencial'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'B1.2',name:'Pós-intermediário 2',t:[
-      {d:'Sexta',h:'08h–12h',m:'Presencial'},{d:'2ª e 4ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'B2.1',name:'Avançado 1',t:[
-      {d:'Sábado',h:'08h–12h',m:'Presencial'},{d:'3ª e 5ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'B2.2',name:'Avançado 2',t:[
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'ESP',name:'Inglês Instrumental',t:[
-      {d:'Sexta',h:'17h–21h',m:'Remota'},
-    ]},
-  ]},
-  frances:{name:'Francês',levels:[
-    {code:'A1.1',name:'Básico 1',t:[
-      {d:'Sábado',h:'08h–12h',m:'Presencial'},{d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'3ª e 5ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'A1.2',name:'Básico 2',t:[
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'3ª e 5ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'A2.1',name:'Intermediário 1',t:[
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},{d:'3ª e 5ª',h:'19h–21h',m:'Remota'},
-    ]},
-    {code:'A2.2',name:'Intermediário 2',t:[
-      {d:'2ª e 4ª',h:'19h–21h',m:'Remota'},
-    ]},
-  ]},
-  espanhol:{name:'Espanhol',levels:[
-    {code:'A1.1',name:'Básico 1',t:[
-      {d:'3ª e 5ª',h:'19h–21h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-    ]},
-    {code:'A1.2',name:'Básico 2',t:[{d:'3ª e 5ª',h:'19h–21h',m:'Remota'}]},
-    {code:'A2.1',name:'Intermediário 1',t:[{d:'2ª e 4ª',h:'19h–21h',m:'Remota'}]},
-    {code:'B2.1',name:'Avançado 1',t:[{d:'2ª e 4ª',h:'19h–21h',m:'Remota'}]},
-  ]},
-  alemao:{name:'Alemão',levels:[
-    {code:'A1.1',name:'Básico 1',t:[
-      {d:'2ª e 4ª',h:'17h–19h',m:'Remota'},{d:'Sábado',h:'08h–12h',m:'Remota'},
-    ]},
-    {code:'A1.2',name:'Básico 2',t:[{d:'2ª e 4ª',h:'19h–21h',m:'Remota'}]},
-    {code:'A2.1',name:'Intermediário 1',t:[{d:'3ª e 5ª',h:'17h–19h',m:'Remota'}]},
-    {code:'B1.1',name:'Pós-intermediário 1',t:[{d:'3ª e 5ª',h:'19h–21h',m:'Remota'}]},
-  ]},
-  japones:{name:'Japonês',levels:[
-    {code:'Nível 1',name:'Básico 1',t:[{d:'2ª e 4ª',h:'19:30–21:30',m:'Remota'}]},
-    {code:'Nível 2',name:'Básico 2',t:[{d:'3ª e 5ª',h:'19:30–21:30',m:'Remota'}]},
-    {code:'Nível 3',name:'Intermediário 1',t:[{d:'6ª e Sáb',h:'19:30–21:30',m:'Remota'}]},
-  ]},
-  portugues:{name:'Português para Estrangeiros',levels:[
-    {code:'Nível 1',name:'Básico 1',t:[{d:'2ª e 4ª',h:'13h–15h',m:'Presencial'}]},
-    {code:'Nível 2',name:'Básico 2',t:[{d:'2ª e 4ª',h:'15h–17h',m:'Presencial'}]},
-  ]},
+const secoes = {
+
+  nivelamento: {
+    title: 'Provas de Nivelamento',
+    sub: 'On-line, gratuitas · apenas para identificar seu nível no NLC',
+    info: 'Esteja em local tranquilo — as provas podem ter questões de áudio, vídeo e gravações. Prepare-se antes de começar!',
+    html: () => `
+      <div class="link-box">
+        <p><strong>Onde fazer a prova?</strong>Acesse o Linktree no dia informado e escolha o idioma desejado.</p>
+        <a href="https://linktr.ee/nlcufpe" target="_blank" rel="noopener">linktr.ee/nlcufpe</a>
+      </div>
+      <div class="content-block">
+        <div class="block-title">Datas das provas · Resultados por e-mail toda quinta até 18h</div>
+        <table class="nivel-table">
+          <thead>
+            <tr>
+              <th>Prova (segunda-feira)</th>
+              <th>Resultado (quinta-feira)</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${[
+              ['29/06/2026','02/07/2026'],
+              ['06/07/2026','09/07/2026'],
+              ['13/07/2026','16/07/2026'],
+              ['20/07/2026','23/07/2026'],
+              ['27/07/2026','30/07/2026'],
+            ].map(([p,r]) => `
+              <tr>
+                <td class="col-prova">${p}</td>
+                <td class="col-result">${r}</td>
+              </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>`,
+  },
+
+  intensivo_cal: {
+    title: 'Curso Intensivo de Julho',
+    sub: 'Calendário de datas · 13 de julho a 7 de agosto de 2026',
+    info: null,
+    html: function() {
+      var cronograma = [
+        ['10/06','quarta-feira',  'Divulgação das turmas',                        false],
+        ['15/06','segunda-feira', 'Abertura das matrículas',                      false],
+        ['08/07','quarta-feira',  'Encerramento das matrículas',                  false],
+        ['10/07','sexta-feira',   'Envio das confirmações e informações do curso', false],
+        ['13/07','segunda-feira', 'Início do Intensivo',                          true ],
+        ['07/08','sexta-feira',   'Encerramento do Intensivo',                    true ]
+      ];
+      var linhasCron = cronograma.map(function(r) {
+        return '<tr class="' + (r[3] ? 'row-marco' : '') + '">' +
+          '<td class="td-data">' + r[0] + '<span class="td-dia">' + r[1] + '</span></td>' +
+          '<td class="td-evento">' + r[2] + '</td>' +
+        '</tr>';
+      }).join('');
+
+      return '<div class="content-block content-block-matricula">' +
+          '<div>' +
+            '<p class="matricula-info-label">Matrículas fechadas</p>' +
+            '<p class="matricula-info-datas">Abrem em 15/06 (segunda-feira)</p>' +
+            '<p class="matricula-info-desc">Encerram em 08/07 (quarta-feira). Fique de olho!</p>' +
+          '</div>' +
+          '<div class="btn-matricula-disabled" aria-disabled="true" role="button">Matrículas fechadas<span>Abrem em 15/06 (segunda-feira)</span></div>' +
+        '</div>' +
+        '<div class="content-block">' +
+          '<div class="block-title">Calendário do Intensivo</div>' +
+          '<table class="datas-table">' + linhasCron + '</table>' +
+        '</div>';
+    }
+  },
+
+  intensivo_turmas: {
+    title: 'Curso Intensivo de Julho',
+    sub: 'Turmas e horários · 2ª a 6ª feira · 13/07 – 07/08',
+    info: null,
+    html: function() {
+      var idiomas = [
+        { nome: 'Inglês',   cor: '#2563eb', bgCor: '#1d4ed8',
+          niveis: [
+            { cod: 'A1.1', nome: 'Básico 1',       hs: [['09h – 12h','Presencial'],['14h – 17h','Presencial'],['18h – 21h','Presencial'],['09h – 12h','Remota'],['14h – 17h','Remota'],['18h – 21h','Remota']] },
+            { cod: 'A1.2', nome: 'Básico 2',        hs: [['09h – 12h','Presencial'],['14h – 17h','Presencial'],['18h – 21h','Presencial'],['09h – 12h','Remota'],['14h – 17h','Remota'],['18h – 21h','Remota']] },
+            { cod: 'A2.1', nome: 'Intermediário 1', hs: [['09h – 12h','Presencial']] },
+            { cod: 'A2.2', nome: 'Intermediário 2', hs: [['18h – 21h','Remota'],['18h – 21h','Presencial']] },
+            { cod: 'B1.2', nome: 'Pós-Intermediário 2', hs: [['09h – 12h','Presencial']] }
+          ]
+        },
+        { nome: 'Francês',  cor: '#7c3aed', bgCor: '#6d28d9',
+          niveis: [
+            { cod: 'A1.1', nome: 'Básico 1',        hs: [['09h – 12h','Presencial'],['18h – 21h','Remota']] },
+            { cod: 'A1.2', nome: 'Básico 2',         hs: [['09h – 12h','Remota']] },
+            { cod: 'A2.1', nome: 'Intermediário 1', hs: [['18h – 21h','Remota'],['09h – 12h','Remota']] },
+            { cod: 'A2.2', nome: 'Intermediário 2', hs: [['14h – 17h','Remota']] },
+            { cod: 'B1.1', nome: 'Pós-Intermediário 1', hs: [['09h – 12h','Remota']] }
+          ]
+        },
+        { nome: 'Espanhol', cor: '#dc2626', bgCor: '#b91c1c',
+          niveis: [
+            { cod: 'A1.1', nome: 'Básico 1',        hs: [['09h – 12h','Remota']] },
+            { cod: 'A1.2', nome: 'Básico 2',         hs: [['09h – 12h','Remota'],['18h – 21h','Remota']] },
+            { cod: 'A2.1', nome: 'Intermediário 1', hs: [['18h – 21h','Remota']] }
+          ]
+        },
+        { nome: 'Alemão',   cor: '#b45309', bgCor: '#92400e',
+          niveis: [
+            { cod: 'A1.1', nome: 'Básico 1',        hs: [['09h – 12h','Remota']] },
+            { cod: 'A1.2', nome: 'Básico 2',         hs: [['09h – 12h','Remota'],['18h – 21h','Remota']] },
+            { cod: 'A2.1', nome: 'Intermediário 1', hs: [['18h – 21h','Remota']] },
+            { cod: 'A2.2', nome: 'Intermediário 2', hs: [['18h – 21h','Remota']] }
+          ]
+        }
+      ];
+
+      var turmasCards = idiomas.map(function(id) {
+        var niveisHtml = id.niveis.map(function(n) {
+          // Consolida horários duplicados: '09h – 12h|Remota' x2 vira 1 ticket com contagem
+          var agrupado = {};
+          n.hs.forEach(function(h) {
+            var chave = h[0] + '|' + h[1];
+            agrupado[chave] = (agrupado[chave] || 0) + 1;
+          });
+          function renderTicket(chave) {
+            var partes = chave.split('|');
+            var hora = partes[0], mod = partes[1], qtd = agrupado[chave];
+            var isP = mod === 'Presencial';
+            return '<div class="turma-ticket ' + (isP ? 'ticket-presencial' : 'ticket-remota') + '">' +
+              '<span class="ticket-hora">' + hora + '</span>' +
+              '<span class="ticket-mod">' + mod + (qtd > 1 ? ' · ' + qtd + ' turmas' : '') + '</span>' +
+            '</div>';
+          }
+          var chaves = Object.keys(agrupado);
+          var remotas     = chaves.filter(function(c){ return c.indexOf('|Remota') > -1; }).map(renderTicket).join('');
+          var presenciais = chaves.filter(function(c){ return c.indexOf('|Presencial') > -1; }).map(renderTicket).join('');
+          var linhas = '';
+          if (remotas)     linhas += '<div class="turma-tickets">' + remotas + '</div>';
+          if (presenciais) linhas += '<div class="turma-tickets">' + presenciais + '</div>';
+          return '<div class="turma-nivel-card">' +
+            '<div class="turma-nivel-topo">' +
+              '<span class="turma-nivel-cod" style="background:' + id.cor + '18;color:' + id.cor + ';border:1px solid ' + id.cor + '44">' + n.cod + '</span>' +
+              '<span class="turma-nivel-fullname">' + n.nome + '</span>' +
+            '</div>' +
+            linhas +
+          '</div>';
+        }).join('');
+        return '<div class="turma-idioma-card">' +
+          '<div class="turma-idioma-topo" style="border-left:4px solid ' + id.bgCor + '">' +
+            '<span class="turma-idioma-nome" style="color:' + id.bgCor + '">' + id.nome + '</span>' +
+          '</div>' +
+          '<div class="turma-idioma-niveis">' + niveisHtml + '</div>' +
+        '</div>';
+      }).join('');
+
+      return '<div class="content-block">' +
+        '<div class="turmas-section-header">' +
+          '<span class="turmas-section-title">Turmas disponíveis</span>' +
+          '<span class="turmas-section-sub">2ª a 6ª feira</span>' +
+        '</div>' +
+        '<div class="turmas-legenda">' +
+          '<span class="legenda-item"><span class="legenda-dot dot-presencial"></span>Presencial — aulas no CAC, Campus Recife</span>' +
+          '<span class="legenda-item"><span class="legenda-dot dot-remota"></span>Remota — aulas on-line ao vivo</span>' +
+        '</div>' +
+        '<div class="turmas-idiomas-grid">' + turmasCards + '</div>' +
+      '</div>';
+    }
+  },
+
+
+  regular: {
+    title: 'Curso Regular',
+    sub: '19 de agosto a 12 de dezembro de 2026',
+    info: null,
+    html: () => `
+      <div class="content-block">
+        <div class="block-title">Cronograma</div>
+        <table class="datas-table">
+          ${[
+            ['10/07','sexta-feira','Divulgação das turmas'],
+            ['15/07','quarta-feira','Abertura das matrículas'],
+            ['15/08','sábado','Encerramento das matrículas'],
+            ['17/08','segunda-feira','Envio das confirmações e informações do curso'],
+            ['19/08','quarta-feira','Início do Semestre Regular'],
+            ['12/12','sábado','Encerramento do Semestre Regular'],
+          ].map(([d,dia,ev], i) => `
+            <tr class="${i >= 4 ? 'row-marco' : ''}">
+              <td class="td-data">${d}<span class="td-dia">${dia}</span></td>
+              <td class="td-evento">${ev}</td>
+            </tr>`).join('')}
+        </table>
+      </div>`,
+  },
+
+  proficiencia: {
+    title: 'Exames de Proficiência – ProfNLC B1',
+    sub: 'Certificado equivalente ao nível B1 do Quadro Europeu de Referência',
+    info: 'Provas disponíveis nos formatos on-line e presencial. O edital completo será publicado simultaneamente à abertura das inscrições.',
+    html: () => `
+      <div class="content-block">
+        <div class="block-title">Inscrições e confirmação</div>
+        <table class="datas-table">
+          <tr>
+            <td class="td-data">20/08 – 13/09<span class="td-dia">período de inscrições</span></td>
+            <td class="td-evento">Inscrições abertas</td>
+          </tr>
+          <tr>
+            <td class="td-data">14/09<span class="td-dia">segunda-feira</span></td>
+            <td class="td-evento">Confirmações enviadas por e-mail</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="content-block">
+        <div class="block-title">Provas on-line — quarta-feira, 16/09/2026</div>
+        ${[
+          ['11:00h – 12:30h','Espanhol'],
+          ['14:00h – 15:30h','Francês'],
+          ['17:00h – 18:30h','Inglês'],
+        ].map(([h,id]) => `
+          <div class="horario-row">
+            <span class="horario-hora">${h}</span>
+            <span class="horario-idioma">${id}</span>
+            <span class="horario-badge badge-online">On-line</span>
+          </div>`).join('')}
+      </div>
+
+      <div class="content-block">
+        <div class="block-title">Provas presenciais — quinta-feira, 17/09/2026</div>
+        ${[
+          ['11:00h – 12:30h','Espanhol'],
+          ['14:00h – 15:30h','Francês'],
+          ['17:00h – 18:30h','Inglês'],
+        ].map(([h,id]) => `
+          <div class="horario-row">
+            <span class="horario-hora">${h}</span>
+            <span class="horario-idioma">${id}</span>
+            <span class="horario-badge badge-presencial">Presencial</span>
+          </div>`).join('')}
+        <p style="font-size:.75rem;color:#aaa;margin-top:.9rem;">Local: Sala 184, CAC UFPE, Campus Recife</p>
+      </div>
+
+      <div class="content-block">
+        <div class="block-title">Resultado</div>
+        <table class="datas-table">
+          <tr class="row-marco">
+            <td class="td-data">25/09<span class="td-dia">sexta-feira</span></td>
+            <td class="td-evento">Divulgação dos resultados e envio dos certificados</td>
+          </tr>
+        </table>
+      </div>`,
+  },
+
 };
 
-function showDetail(id){
-  const d=data[id];
-  document.getElementById('home').style.display='none';
-  const det=document.getElementById('detail');
-  det.style.display='block';
+/* acessibilidade — teclado */
+document.querySelectorAll('[role="button"][onclick]').forEach(card => {
+  card.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+  });
+});
+
+// Registra a home no histórico ao carregar
+history.replaceState({ page: 'home' }, '');
+
+function renderDetail(id) {
+  const s = secoes[id];
+  document.getElementById('home').style.display = 'none';
+
+  const det = document.getElementById('detail');
+  det.style.display = 'block';
   det.classList.remove('fade');
   void det.offsetWidth;
   det.classList.add('fade');
-  document.getElementById('d-title').textContent=d.name;
-  let html='';
-  d.levels.forEach((lv,i)=>{
-    const c=colors[i%colors.length];
-    html+=`<div class="level-block">
-      <div class="level-top">
-        <span class="level-code" style="background:${c}20;color:${c}">${lv.code}</span>
-        <span class="level-name">${lv.name}</span>
-      </div>
-      <div class="turmas-row">`;
-    lv.t.forEach(t=>{
-      const cls=t.m==='Presencial'?'mod-p':'mod-r';
-      html+=`<div class="turma-chip">
-        <div class="chip-dia">${t.d}</div>
-        <div class="chip-hora">${t.h}</div>
-        <span class="chip-mod ${cls}">${t.m}</span>
-      </div>`;
-    });
-    html+=`</div></div>`;
-  });
-  document.getElementById('d-body').innerHTML=html;
-  window.scrollTo({top:0,behavior:'smooth'});
+
+  document.getElementById('d-title').textContent = s.title;
+  document.getElementById('d-sub').textContent   = s.sub;
+
+  let html = '';
+  if (s.info) {
+    html += `<div class="info-box">
+      <span class="info-box-icon">${ICON_INFO}</span>
+      <p>${s.info}</p>
+    </div>`;
+  }
+  html += s.html();
+  document.getElementById('d-body').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function goBack(){
-  document.getElementById('detail').style.display='none';
-  const home=document.getElementById('home');
-  home.style.display='block';
+function showDetail(id) {
+  history.pushState({ page: 'detail', id }, '');
+  renderDetail(id);
+}
+
+function renderHome() {
+  document.getElementById('detail').style.display = 'none';
+  const home = document.getElementById('home');
+  home.style.display = 'block';
   home.classList.remove('fade');
   void home.offsetWidth;
   home.classList.add('fade');
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function goBack() {
+  history.back();
+}
+
+// Intercepta botão voltar do browser e swipe do celular
+window.addEventListener('popstate', e => {
+  if (!e.state || e.state.page === 'home') {
+    renderHome();
+  } else if (e.state.page === 'detail') {
+    renderDetail(e.state.id);
+  }
+});
 </script>
 </body>
 </html>
